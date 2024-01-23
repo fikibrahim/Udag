@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyB2tNo6ag3qZ8EgCGlT_lL4w4q9PWZJBgs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>795469653274</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.uber</string>
+	<key>PROJECT_ID</key>
+	<string>absensiapp-977fd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>absensiapp-977fd.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:795469653274:ios:c0240da0549b6e5bb5b8a3</string>
+	<key>DATABASE_URL</key>
+	<string>https://absensiapp-977fd-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

@@ -1,14 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uber/common/controlrer/authProvider.dart';
-import 'package:uber/common/view/authScreren/loginScreen.dart';
-import 'package:uber/common/view/authScreren/otpScreen.dart';
+import 'package:uber/common/view/registrationScreen/registrationScreen.dart';
 import 'package:uber/constant/utils/colors.dart';
 import 'package:sizer/sizer.dart';
+import 'package:uber/firebase_options.dart';
 import 'package:uber/rider/controller/bottomNavBarRiderProvider/bottomNavBarRiderProvider.dart';
-import 'package:uber/rider/view/bottomNavbar/bottomNavbarRider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const Uber());
 }
 
@@ -37,7 +39,7 @@ class _UberState extends State<Uber> {
             debugShowCheckedModeBanner: false,
             theme:
                 ThemeData(appBarTheme: AppBarTheme(color: white, elevation: 0)),
-            home: const OTPScreen(),
+            home: const RegistrationScreen(),
           ),
         );
       },
