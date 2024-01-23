@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
-import 'package:uber/common/controlrer/authProvider.dart';
+import 'package:uber/common/controlrer/provider/authProvider.dart';
+import 'package:uber/common/controlrer/provider/mobileAuthServices.dart';
 import 'package:uber/common/widget/elevatedButtonCommon.dart';
 import 'package:uber/constant/utils/colors.dart';
 import 'package:uber/constant/utils/textStyles.dart';
@@ -134,7 +135,9 @@ class _OTPScreenState extends State<OTPScreen> {
             enableActiveFill: true,
             errorAnimationController: errorController,
             controller: otpController,
-            onCompleted: (value) {},
+            onCompleted: (value) {
+              MobileAuthServices.verfyOTP(context: context, otp: otpController.text.trim());
+            },
             onChanged: (value) {},
             beforeTextPaste: (text) {
               return true;
