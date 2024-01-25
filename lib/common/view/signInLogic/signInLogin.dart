@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uber/common/controlrer/provider/mobileAuthServices.dart';
+import 'package:uber/common/controlrer/services/mobileAuthServices.dart';
 import 'package:uber/constant/utils/colors.dart';
 
 class SignInLogic extends StatefulWidget {

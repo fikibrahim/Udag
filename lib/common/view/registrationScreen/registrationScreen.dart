@@ -1,8 +1,16 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:sizer/sizer.dart';
+import 'package:uber/common/controlrer/services/imageServices.dart';
+import 'package:uber/common/controlrer/services/profileDataCRUDServices.dart';
+import 'package:uber/common/controlrer/services/toastServices.dart';
+import 'package:uber/common/model/profileDataModel.dart';
 import 'package:uber/common/widget/elevatedButtonCommon.dart';
+import 'package:uber/constant/constants.dart';
 import 'package:uber/constant/utils/colors.dart';
 import 'package:uber/constant/utils/textStyles.dart';
 
@@ -17,14 +25,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController VhicleModelNameController = TextEditingController();
-  TextEditingController VhicleBrandNameController = TextEditingController();
-  TextEditingController VhicleRegistrationNameController =
+  TextEditingController vehicleModelNameColtroller = TextEditingController();
+  TextEditingController vehicleBrandNameController = TextEditingController();
+  TextEditingController vehicleRegistrationNumberController =
       TextEditingController();
   TextEditingController drivingLicenseNumberController =
       TextEditingController();
 
-  String selectedVhicle = 'Select Vhicle Type';
+  String selectedVehicleType = 'Select Vhicle Type';
   List<String> VhicleTypes = [
     'Select Vhicle Type',
     'Mini',
@@ -41,7 +49,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    mobileController.text = '+6285813083237';
+    mobileController.text = auth.currentUser!.phoneNumber!;
   }
 
   @override
@@ -50,10 +58,128 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.dispose();
     nameController.dispose();
     emailController.dispose();
-    VhicleBrandNameController.dispose();
-    VhicleModelNameController.dispose();
-    VhicleRegistrationNameController.dispose();
+    vehicleBrandNameController.dispose();
+    vehicleModelNameColtroller.dispose();
+    vehicleRegistrationNumberController.dispose();
     drivingLicenseNumberController.dispose();
+  }
+
+  registerDriver() async {
+    if (profilePic == null) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Select a Profile Pic',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (nameController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter your Name',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (mobileController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter your Mobile number',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (emailController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter your Email',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (vehicleBrandNameController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter the Vehicle Brand Name',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (vehicleModelNameColtroller.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter the vehicle model name',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (selectedVehicleType == 'Select Vehicle Type') {
+      ToastService.sendScaffoldAlert(
+        msg: 'Select a vehicle type',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (vehicleRegistrationNumberController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter vehicle registration number',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (drivingLicenseNumberController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter your Driving license number',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else {
+      String profilePicURL = await ImageServices.uploadImageToFirebaseStorage(
+          image: File(profilePic!.path), context: context);
+      ProfileDataModel profileData = ProfileDataModel(
+        profilePicUrl: profilePicURL,
+        name: nameController.text.trim(),
+        mobileNumber: auth.currentUser!.phoneNumber!,
+        email: emailController.text.trim(),
+        userType: 'PARTNER',
+        vehicleBrandName: vehicleBrandNameController.text.trim(),
+        vehicleModel: vehicleModelNameColtroller.text.trim(),
+        vehicleType: selectedVehicleType,
+        vehicleRegistrationNumber:
+            vehicleRegistrationNumberController.text.trim(),
+        drivingLicenseNumber: drivingLicenseNumberController.text.trim(),
+        registeredDateTime: DateTime.now(),
+      );
+      await ProfileDataCRUDServices.registerUserToDatabase(
+          profileData: profileData, context: context);
+    }
+  }
+
+  registerCustomer() async {
+    if (profilePic == null) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Select a Profile Pic',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (nameController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter your Name',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (mobileController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter your Mobile number',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else if (emailController.text.isEmpty) {
+      ToastService.sendScaffoldAlert(
+        msg: 'Enter your Email',
+        toastStatus: 'WARNING',
+        context: context,
+      );
+    } else {
+      String profilePicURL = await ImageServices.uploadImageToFirebaseStorage(
+          image: File(profilePic!.path), context: context);
+      ProfileDataModel profileData = ProfileDataModel(
+        profilePicUrl: profilePicURL,
+        name: nameController.text.trim(),
+        mobileNumber: auth.currentUser!.phoneNumber!,
+        email: emailController.text.trim(),
+        userType: 'CUSTOMER',
+        registeredDateTime: DateTime.now(),
+      );
+      await ProfileDataCRUDServices.registerUserToDatabase(
+          profileData: profileData, context: context);
+    }
   }
 
   @override
@@ -68,7 +194,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             height: 2.h,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () async {
+              final image =
+                  await ImageServices.getImageFromGallery(context: context);
+              if (image != null) {
+                setState(() {
+                  profilePic = File(image.path);
+                });
+              }
+            },
             child: CircleAvatar(
               radius: 8.h,
               backgroundColor: greyShade3,
@@ -196,7 +330,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           height: 15.h,
         ),
         ElevatedButtonCommon(
-          onPressed: () {},
+          onPressed: () async {
+            setState(() {
+              registerButtonPressed == true;
+            });
+            await registerCustomer();
+          },
           backgroundColor: black,
           width: 94.w,
           height: 6.h,
@@ -216,7 +355,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RegistrationScreenTextField(
-          controller: VhicleBrandNameController,
+          controller: vehicleBrandNameController,
           hint: '',
           title: 'Vhicle Brand Name',
           keyBoardType: TextInputType.name,
@@ -226,7 +365,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           height: 2.h,
         ),
         RegistrationScreenTextField(
-          controller: VhicleModelNameController,
+          controller: vehicleModelNameColtroller,
           hint: '',
           title: 'Vhicle Model',
           keyBoardType: TextInputType.name,
@@ -244,23 +383,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               border: Border.all(color: grey)),
           child: DropdownButton(
             isExpanded: true,
-            value: selectedVhicle,
+            value: selectedVehicleType,
             underline: const SizedBox(),
             icon: const Icon(Icons.keyboard_arrow_down),
-            items: VhicleTypes
-                .map(
-                  (e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(
-                      e,
-                      style: AppTextStyles.small12,
-                    ),
-                  ),
-                )
-                .toList(),
+            items: VhicleTypes.map(
+              (e) => DropdownMenuItem(
+                value: e,
+                child: Text(
+                  e,
+                  style: AppTextStyles.small12,
+                ),
+              ),
+            ).toList(),
             onChanged: (value) {
               setState(() {
-                selectedVhicle = value!;
+                selectedVehicleType = value!;
               });
             },
           ),
@@ -277,7 +414,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         // ),
         SizedBox(height: 1.h),
         RegistrationScreenTextField(
-          controller: VhicleRegistrationNameController,
+          controller: vehicleRegistrationNumberController,
           hint: '',
           title: 'Vhicle Registration No.',
           keyBoardType: TextInputType.name,
@@ -297,7 +434,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           height: 2.h,
         ),
         ElevatedButtonCommon(
-          onPressed: () {},
+          onPressed: () async {
+            setState(() {
+              registerButtonPressed == true;
+            });
+            await registerDriver();
+          },
           backgroundColor: black,
           width: 94.w,
           height: 6.h,

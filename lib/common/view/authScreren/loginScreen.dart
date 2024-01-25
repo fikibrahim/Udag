@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:uber/common/controlrer/provider/authProvider.dart';
-import 'package:uber/common/controlrer/provider/mobileAuthServices.dart';
+import 'package:uber/common/controlrer/services/mobileAuthServices.dart';
 import 'package:uber/common/widget/assetsGen.dart';
 import 'package:uber/common/widget/elevatedButtonCommon.dart';
 import 'package:uber/common/widget/orDiveder.dart';

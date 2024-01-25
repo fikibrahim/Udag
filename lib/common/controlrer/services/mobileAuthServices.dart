@@ -6,23 +6,28 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uber/common/controlrer/provider/authProvider.dart';
+import 'package:uber/common/controlrer/services/profileDataCRUDServices.dart';
 import 'package:uber/common/view/authScreren/loginScreen.dart';
 import 'package:uber/common/view/authScreren/otpScreen.dart';
+import 'package:uber/common/view/driverHomeScreen.dart';
+import 'package:uber/common/view/registrationScreen/registrationScreen.dart';
 import 'package:uber/constant/constants.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:uber/rider/view/bottomNavbar/bottomNavbarRider.dart';
+import 'package:uber/rider/view/homeScreen/riderHomeScreen.dart';
 
 class MobileAuthServices {
+
   static receiveOTP(
       {required BuildContext context, required String mobileNumber}) async {
     try {
       await auth.verifyPhoneNumber(
         phoneNumber: mobileNumber,
         verificationCompleted: (PhoneAuthCredential credential) {
-          log(credential.toString() as num);
+          // log(credential.toString() as num);
         },
         verificationFailed: (FirebaseAuthException exception) {
-          log(exception.toString() as num);
+          // log(exception.toString() as num);
         },
         codeSent: (String verificationCode, int? resendToken) {
           context
@@ -68,14 +73,7 @@ class MobileAuthServices {
   static checkAuthenticationAndNavigate({required BuildContext context}) {
     bool userIsAuthenticated = checkAuthentication();
     userIsAuthenticated
-        ? Navigator.pushAndRemoveUntil(
-            context,
-            PageTransition(
-              child: const BottomNavbarRider(),
-              type: PageTransitionType.rightToLeft,
-            ),
-            (route) => false,
-          )
+        ? checkUser(context)
         : Navigator.pushAndRemoveUntil(
             context,
             PageTransition(
@@ -85,4 +83,34 @@ class MobileAuthServices {
           );
   }
 
+  static checkUser(BuildContext context) async {
+    bool userIsRegistered =
+        await ProfileDataCRUDServices.checkForRegisterUser(context);
+
+    if (userIsRegistered == true) {
+      bool userIsDriver = await ProfileDataCRUDServices.userIsDriver(context);
+      if (userIsDriver == true) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            PageTransition(
+                child: const RiderHomeScreen(),
+                type: PageTransitionType.rightToLeft),
+            (route) => false);
+      } else {
+        Navigator.pushAndRemoveUntil(
+            context,
+            PageTransition(
+                child: const BottomNavbarRider(),
+                type: PageTransitionType.rightToLeft),
+            (route) => false);
+      }
+    } else {
+      Navigator.pushAndRemoveUntil(
+          context,
+          PageTransition(
+              child: const RegistrationScreen(),
+              type: PageTransitionType.rightToLeft),
+          (route) => false);
+    }
+  }
 }
