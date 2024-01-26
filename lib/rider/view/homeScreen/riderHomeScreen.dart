@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 import 'package:uber/constant/utils/colors.dart';
 import 'package:uber/constant/utils/textStyles.dart';
+import 'package:uber/rider/view/selectPickupAndLocation/selectPickupAndLocation.dart';
 
 class RiderHomeScreen extends StatefulWidget {
   const RiderHomeScreen({super.key});
@@ -74,7 +76,14 @@ class _RiderHomeScreenState extends State<RiderHomeScreen> {
         children: [
           // Where To Button
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                    child: const PickupAndDropLocationScreen(),
+                    type: PageTransitionType.rightToLeft),
+              );
+            },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
               decoration: BoxDecoration(
