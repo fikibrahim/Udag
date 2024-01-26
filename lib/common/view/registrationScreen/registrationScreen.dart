@@ -122,20 +122,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     } else {
       String profilePicURL = await ImageServices.uploadImageToFirebaseStorage(
           image: File(profilePic!.path), context: context);
+
       ProfileDataModel profileData = ProfileDataModel(
-        profilePicUrl: profilePicURL,
-        name: nameController.text.trim(),
-        mobileNumber: auth.currentUser!.phoneNumber!,
-        email: emailController.text.trim(),
-        userType: 'PARTNER',
-        vehicleBrandName: vehicleBrandNameController.text.trim(),
-        vehicleModel: vehicleModelNameColtroller.text.trim(),
-        vehicleType: selectedVehicleType,
-        vehicleRegistrationNumber:
-            vehicleRegistrationNumberController.text.trim(),
-        drivingLicenseNumber: drivingLicenseNumberController.text.trim(),
-        registeredDateTime: DateTime.now(),
-      );
+          // profilePicUrl: profilePicURL,
+          // name: nameController.text.trim(),
+          // mobileNumber: auth.currentUser!.phoneNumber!,
+          // email: emailController.text.trim(),
+          // userType: 'PARTNER',
+          // vehicleBrandName: vehicleBrandNameController.text.trim(),
+          // vehicleModel: vehicleModelNameColtroller.text.trim(),
+          // vehicleType: selectedVehicleType,
+          // vehicleRegistrationNumber:
+          //     vehicleRegistrationNumberController.text.trim(),
+          // drivingLicenseNumber: drivingLicenseNumberController.text.trim(),
+          // registeredDateTime: DateTime.now(),
+          );
       await ProfileDataCRUDServices.registerUserToDatabase(
           profileData: profileData, context: context);
     }

@@ -89,11 +89,11 @@ class MobileAuthServices {
 
     if (userIsRegistered == true) {
       bool userIsDriver = await ProfileDataCRUDServices.userIsDriver(context);
-      if (userIsDriver == true) {
+      if (userIsDriver == false) {
         Navigator.pushAndRemoveUntil(
             context,
             PageTransition(
-                child: const RiderHomeScreen(),
+                child: const HomeScreenDriver(),
                 type: PageTransitionType.rightToLeft),
             (route) => false);
       } else {
