@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uber/common/controlrer/provider/authProvider.dart';
-import 'package:uber/common/view/registrationScreen/registrationScreen.dart';
+import 'package:uber/common/controlrer/provider/locationProvider.dart';
 import 'package:uber/common/view/signInLogic/signInLogin.dart';
 import 'package:uber/constant/utils/colors.dart';
 import 'package:sizer/sizer.dart';
@@ -34,6 +34,9 @@ class _UberState extends State<Uber> {
             ),
             ChangeNotifierProvider<MobileAuthProvider>(
               create: (_) => MobileAuthProvider(),
+            ),
+            ChangeNotifierProvider<LocationProvider>(
+              create: (_) => LocationProvider(),
             ),
           ],
           child: MaterialApp(

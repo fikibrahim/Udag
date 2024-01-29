@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:uber/common/view/signInLogic/signInLogin.dart';
 import 'package:uber/constant/constants.dart';
 
 class ProfileDataCRUDServices {
+
   static getProfileDataFromRealTimeDatabase(String userID) async {
     try {
       final snapshot = await realTimeDatabaseRef.child('User/$userID').get();
@@ -103,4 +103,6 @@ class ProfileDataCRUDServices {
     }
     return true;
   }
+
+
 }
