@@ -2,30 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:uber/common/view/driverHomeScreen.dart';
 import 'package:uber/constant/utils/colors.dart';
 import 'package:uber/driver/controller/bottomNavBarRiderProvider.dart';
 import 'package:uber/driver/view/accountScreenDriver/acountScreenDriver.dart';
 import 'package:uber/driver/view/activityScreenDriver/activityScreenDriver.dart';
-import 'package:uber/rider/controller/bottomNavBarRiderProvider/bottomNavBarRiderProvider.dart';
+import 'package:uber/driver/view/homeScreenDriver/driverHomeScreen.dart';
 import 'package:uber/rider/view/account/acountScreenRider.dart';
-import 'package:uber/rider/view/activity/activityScreen.dart';
-import 'package:uber/rider/view/homeScreen/riderHomeScreen.dart';
 
-import 'package:uber/rider/view/serviceScreen/serviceScreen.dart';
-
-class BottomNavbarRider extends StatefulWidget {
-  const BottomNavbarRider({super.key});
+class BottomNavBarDriver extends StatefulWidget {
+  const BottomNavBarDriver({super.key});
 
   @override
-  State<BottomNavbarRider> createState() => _BottomNavbarRiderState();
+  State<BottomNavBarDriver> createState() => _BottomNavBarDriverState();
 }
 
-class _BottomNavbarRiderState extends State<BottomNavbarRider> {
+class _BottomNavBarDriverState extends State<BottomNavBarDriver> {
   List<Widget> screens = [
     const HomeScreenDriver(),
     const ActivityScreendDriver(),
-    // const ServiceScreenRider(),
+    // const AccountScreenDriver(),
     const AccountScreenDriver()
   ];
 
@@ -38,6 +33,7 @@ class _BottomNavbarRiderState extends State<BottomNavbarRider> {
           title: 'Home',
           activeColorPrimary: black,
           inactiveColorPrimary: grey),
+
       // PersistentBottomNavBarItem(
       //     icon: Icon(currentTab == 0
       //         ? CupertinoIcons.circle_grid_3x3_fill
@@ -45,6 +41,7 @@ class _BottomNavbarRiderState extends State<BottomNavbarRider> {
       //     title: 'Services',
       //     activeColorPrimary: black,
       //     inactiveColorPrimary: grey),
+
       PersistentBottomNavBarItem(
           icon: Icon(currentTab == 0
               ? CupertinoIcons.square_list_fill
@@ -74,10 +71,7 @@ class _BottomNavbarRiderState extends State<BottomNavbarRider> {
           controller: controller,
           items: _navBarItem(tabProvider.currentTab),
           confineInSafeArea: true,
-          onItemSelected: (value) {
-            tabProvider.updateTab(value);
-            print(value.toString());
-          },
+          onItemSelected: (value) {},
           backgroundColor: white,
           handleAndroidBackButtonPress: true,
           resizeToAvoidBottomInset: true,

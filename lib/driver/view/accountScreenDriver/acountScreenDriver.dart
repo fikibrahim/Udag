@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:uber/common/controlrer/provider/profileDataProvider.dart';
 import 'package:uber/constant/utils/colors.dart';
 import 'package:uber/constant/utils/textStyles.dart';
 
-class AccountScreenRider extends StatefulWidget {
-  const AccountScreenRider({super.key});
+class AccountScreenDriver extends StatefulWidget {
+  const AccountScreenDriver({super.key});
 
   @override
-  State<AccountScreenRider> createState() => _AccountScreenRiderState();
+  State<AccountScreenDriver> createState() => _AccountScreenDriverState();
 }
 
-class _AccountScreenRiderState extends State<AccountScreenRider> {
+class _AccountScreenDriverState extends State<AccountScreenDriver> {
   List accountTopButtons = [
     [CupertinoIcons.shield_fill, 'Help'],
     [CupertinoIcons.creditcard_fill, 'Payment'],
@@ -28,6 +30,15 @@ class _AccountScreenRiderState extends State<AccountScreenRider> {
     [CupertinoIcons.person_fill, 'Manage Uber account'],
     [CupertinoIcons.power, 'Logout'],
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      context.read<ProfileDataProvider>().getProfileData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,29 +59,62 @@ class _AccountScreenRiderState extends State<AccountScreenRider> {
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
               children: [
                 // Profile data
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 70.w,
-                      child: Text(
-                        'Taufik Ibrahim',
-                        style: AppTextStyles.heading26Bold,
-                      ),
-                    ),
-                    Container(
-                      height: 16.w,
-                      width: 16.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: black87),
-                        color: black,
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/uberLogo/uber.png'),
-                        ),
-                      ),
-                    ),
-                  ],
+                Consumer<ProfileDataProvider>(
+                  builder: (context, profileProvider, child) {
+                    if (profileProvider.profileData == null) {
+                      return Row(
+                        children: [
+                          SizedBox(
+                            width: 70.w,
+                            child: Text(
+                              'User',
+                              style: AppTextStyles.heading26Bold,
+                            ),
+                          ),
+                          Container(
+                            height: 16.w,
+                            width: 16.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: black87),
+                              color: black,
+                              image: const DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/uberLogo/uber.png'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Row(
+                        children: [
+                          SizedBox(
+                            width: 70.w,
+                            child: Text(
+                              profileProvider.profileData!.name!,
+                              style: AppTextStyles.heading26Bold,
+                            ),
+                          ),
+                          Container(
+                            height: 16.w,
+                            width: 16.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: black87),
+                              color: black,
+                              image: DecorationImage(
+                                image: NetworkImage(profileProvider
+                                    .profileData!.profilePicUrl!),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  },
                 ),
+
                 SizedBox(height: 3.h),
                 // Top Row Buttons
                 Row(

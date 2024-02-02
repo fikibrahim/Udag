@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "795469653274",
-    "firebase_url": "https://absensiapp-977fd-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "absensiapp-977fd",
-    "storage_bucket": "absensiapp-977fd.appspot.com"
+    "project_number": "840228863297",
+    "project_id": "fst-fashion-6cc37",
+    "storage_bucket": "fst-fashion-6cc37.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:795469653274:android:d665f55e9efbbd10b5b8a3",
+        "mobilesdk_app_id": "1:840228863297:android:eaa21eb14071086e5d75c0",
         "android_client_info": {
-          "package_name": "com.example.uber"
+          "package_name": "com.example.phone_otp_ui"
         }
       },
       "oauth_client": [
         {
-          "client_id": "795469653274-3gop271sujrshgchmaeiehdhb7c0ovka.apps.googleusercontent.com",
+          "client_id": "840228863297-6tedu8prj7591gdooovgk2306392i6r2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.phone_otp_ui",
+            "certificate_hash": "efc677a6bd46457f56473bbc92f95ccd7d17504b"
+          }
+        },
+        {
+          "client_id": "840228863297-0fid6cd2p24117lr8vl3jja1ojjvl7bh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBaJGnx3ViMatru5nEArag-DIbB8X7Rg-A"
+          "current_key": "AIzaSyDdIZYuLNbmc31DEZOYdRMTzzyNbz_lu-c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "795469653274-3gop271sujrshgchmaeiehdhb7c0ovka.apps.googleusercontent.com",
+              "client_id": "840228863297-0fid6cd2p24117lr8vl3jja1ojjvl7bh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -37,27 +44,64 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:795469653274:android:58c9be3440bedae2b5b8a3",
+        "mobilesdk_app_id": "1:840228863297:android:626619ea6be610e95d75c0",
         "android_client_info": {
-          "package_name": "com.taufikibrahim.absesnsiapp"
+          "package_name": "com.fstfashion"
         }
       },
       "oauth_client": [
         {
-          "client_id": "795469653274-3gop271sujrshgchmaeiehdhb7c0ovka.apps.googleusercontent.com",
+          "client_id": "840228863297-r3nvqlmforkijs453sipfvokm3m2fm1e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fstfashion",
+            "certificate_hash": "efc677a6bd46457f56473bbc92f95ccd7d17504b"
+          }
+        },
+        {
+          "client_id": "840228863297-0fid6cd2p24117lr8vl3jja1ojjvl7bh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBaJGnx3ViMatru5nEArag-DIbB8X7Rg-A"
+          "current_key": "AIzaSyDdIZYuLNbmc31DEZOYdRMTzzyNbz_lu-c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "795469653274-3gop271sujrshgchmaeiehdhb7c0ovka.apps.googleusercontent.com",
+              "client_id": "840228863297-0fid6cd2p24117lr8vl3jja1ojjvl7bh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840228863297:android:4dbd0aaef6f7d9ab5d75c0",
+        "android_client_info": {
+          "package_name": "com.fstfashion.tso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840228863297-0fid6cd2p24117lr8vl3jja1ojjvl7bh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdIZYuLNbmc31DEZOYdRMTzzyNbz_lu-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840228863297-0fid6cd2p24117lr8vl3jja1ojjvl7bh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

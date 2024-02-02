@@ -1,23 +1,20 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uber/common/controlrer/provider/authProvider.dart';
+import 'package:uber/common/controlrer/provider/profileDataProvider.dart';
 import 'package:uber/common/controlrer/services/profileDataCRUDServices.dart';
 import 'package:uber/common/view/authScreren/loginScreen.dart';
 import 'package:uber/common/view/authScreren/otpScreen.dart';
-import 'package:uber/common/view/driverHomeScreen.dart';
+import 'package:uber/driver/view/bottomNavBarDriver/bottomNavbarDriver.dart';
 import 'package:uber/common/view/registrationScreen/registrationScreen.dart';
 import 'package:uber/constant/constants.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:uber/rider/view/bottomNavbar/bottomNavbarRider.dart';
-import 'package:uber/rider/view/homeScreen/riderHomeScreen.dart';
 
 class MobileAuthServices {
-
   static receiveOTP(
       {required BuildContext context, required String mobileNumber}) async {
     try {
@@ -89,14 +86,18 @@ class MobileAuthServices {
 
     if (userIsRegistered == true) {
       bool userIsDriver = await ProfileDataCRUDServices.userIsDriver(context);
-      if (userIsDriver == false) {
+      if (userIsDriver == true) {
+        // Navigate to Driver application
+        context.read<ProfileDataProvider>().getProfileData();
         Navigator.pushAndRemoveUntil(
             context,
             PageTransition(
-                child: const HomeScreenDriver(),
+                child: const BottomNavBarDriver(),
                 type: PageTransitionType.rightToLeft),
             (route) => false);
       } else {
+        // Navigate to rider application
+        context.read<ProfileDataProvider>().getProfileData();
         Navigator.pushAndRemoveUntil(
             context,
             PageTransition(

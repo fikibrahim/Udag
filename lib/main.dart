@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uber/common/controlrer/provider/authProvider.dart';
 import 'package:uber/common/controlrer/provider/locationProvider.dart';
+import 'package:uber/common/controlrer/provider/profileDataProvider.dart';
 import 'package:uber/common/view/signInLogic/signInLogin.dart';
 import 'package:uber/constant/utils/colors.dart';
 import 'package:sizer/sizer.dart';
+import 'package:uber/driver/controller/bottomNavBarRiderProvider.dart';
+import 'package:uber/driver/controller/services/mapsProviderDriver.dart';
 import 'package:uber/firebase_options.dart';
 import 'package:uber/rider/controller/bottomNavBarRiderProvider/bottomNavBarRiderProvider.dart';
 
@@ -29,6 +32,7 @@ class _UberState extends State<Uber> {
       builder: (context, _, __) {
         return MultiProvider(
           providers: [
+            // ! common Providers
             ChangeNotifierProvider<BottomNavbarRiderProvider>(
               create: (_) => BottomNavbarRiderProvider(),
             ),
@@ -37,6 +41,17 @@ class _UberState extends State<Uber> {
             ),
             ChangeNotifierProvider<LocationProvider>(
               create: (_) => LocationProvider(),
+            ),
+            ChangeNotifierProvider<ProfileDataProvider>(
+              create: (_) => ProfileDataProvider(),
+            ),
+            // ! Rider Provider
+            // ! Driver Provider
+            ChangeNotifierProvider<BottomNavbarDriverProvider>(
+              create: (_) => BottomNavbarDriverProvider(),
+            ),
+            ChangeNotifierProvider<MapsProviderDriver>(
+              create: (_) => MapsProviderDriver(),
             ),
           ],
           child: MaterialApp(
