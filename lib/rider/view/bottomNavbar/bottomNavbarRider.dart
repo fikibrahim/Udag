@@ -7,7 +7,7 @@ import 'package:uber/constant/utils/colors.dart';
 import 'package:uber/driver/controller/bottomNavBarRiderProvider.dart';
 import 'package:uber/driver/view/accountScreenDriver/acountScreenDriver.dart';
 import 'package:uber/driver/view/activityScreenDriver/activityScreenDriver.dart';
-import 'package:uber/rider/controller/bottomNavBarRiderProvider/bottomNavBarRiderProvider.dart';
+import 'package:uber/rider/controller/provider/bottomNavBarRiderProvider/bottomNavBarRiderProvider.dart';
 import 'package:uber/rider/view/account/acountScreenRider.dart';
 import 'package:uber/rider/view/activity/activityScreen.dart';
 import 'package:uber/rider/view/homeScreen/riderHomeScreen.dart';

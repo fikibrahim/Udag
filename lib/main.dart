@@ -10,7 +10,7 @@ import 'package:sizer/sizer.dart';
 import 'package:uber/driver/controller/bottomNavBarRiderProvider.dart';
 import 'package:uber/driver/controller/services/mapsProviderDriver.dart';
 import 'package:uber/firebase_options.dart';
-import 'package:uber/rider/controller/bottomNavBarRiderProvider/bottomNavBarRiderProvider.dart';
+import 'package:uber/rider/controller/provider/bottomNavBarRiderProvider/bottomNavBarRiderProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
